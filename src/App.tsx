@@ -37,7 +37,7 @@ const headers = [
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
-  const [orderData, setOrderData] = useState([]);
+  const [orderData, setOrderData] = useState<Array<OrderData>>([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
