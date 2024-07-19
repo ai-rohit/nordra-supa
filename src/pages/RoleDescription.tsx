@@ -1,10 +1,13 @@
-import { Button, Tile } from "@carbon/react";
-import React, { useEffect, useState } from "react";
+import { Button } from "@carbon/react";
+import { useEffect, useState } from "react";
 import { ebraiSupabase } from "../config/supabase";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const RolesDescription = () => {
-	const [selectedRole, setSelectedRole] = useState(null);
+	const [selectedRole, setSelectedRole] = useState<null | {
+		title: string;
+		description: string;
+	}>(null);
 	const { id } = useParams();
 	const getSelectedRole = async () => {
 		const { data: role } = await ebraiSupabase

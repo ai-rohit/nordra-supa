@@ -1,10 +1,10 @@
 import { Button, Tile } from "@carbon/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ebraiSupabase } from "../config/supabase";
 import { Link } from "react-router-dom";
 
 const Roles = () => {
-	const [roleData, setRoleData] = useState([]);
+	const [roleData, setRoleData] = useState<any>([]);
 
 	useEffect(() => {
 		(async () => {

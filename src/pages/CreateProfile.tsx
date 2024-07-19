@@ -1,7 +1,7 @@
 // simple form component to create a profile for job applicants
 import React, { useEffect, useState } from "react";
-import { Button, Checkbox, RadioButton, TextInput } from "@carbon/react";
-import { ebraiSupabase, supabase } from "../config/supabase";
+import { Button, Checkbox, TextInput } from "@carbon/react";
+import { supabase } from "../config/supabase";
 import { Session } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const CreateProfile = () => {
 		phone: "",
 		experience: 0,
 		about: "",
-		skills: [],
+		skills: [] as Array<string>,
 		criteria_score: 80,
 		location: "",
 	};
@@ -67,7 +67,7 @@ const CreateProfile = () => {
 	console.log(profile);
 	const handleSubmit = async () => {
 		if (alreadyHasProfile) {
-			const { data, error } = await supabase
+			const { error } = await supabase
 				.from("candidates_profiles")
 				.update(profile)
 				.eq("user_id", session?.user.id)
@@ -79,7 +79,7 @@ const CreateProfile = () => {
 				navigate("/roles");
 			}
 		} else {
-			const { data, error } = await supabase
+			const { error } = await supabase
 				.from("candidates_profiles")
 				.insert({ ...profile, user_id: session?.user.id })
 				.limit(1)
@@ -93,58 +93,77 @@ const CreateProfile = () => {
 	};
 	return (
 		<div>
-			<div>
-				<p>First Name</p>
+			<div style={{ marginTop: 10 }}>
 				<TextInput
+					id="first_name"
+					labelText="First Name"
 					name="first_name"
 					value={profile.first_name}
 					onChange={handleChange}
 				/>
 			</div>
 
-			<div>
-				<p>Last Name</p>
+			<div style={{ marginTop: 10 }}>
 				<TextInput
+					id="last_name"
+					labelText="Last Name"
 					name="last_name"
 					value={profile.last_name}
 					onChange={handleChange}
 				/>
 			</div>
 
-			<div>
-				<p>Email</p>
-				<TextInput name="email" value={profile.email} onChange={handleChange} />
-			</div>
-
-			<div>
-				<p>Phone</p>
-				<TextInput name="phone" value={profile.phone} onChange={handleChange} />
-			</div>
-
-			<div>
-				<p>Locaiton</p>
+			<div style={{ marginTop: 10 }}>
 				<TextInput
+					id="email"
+					labelText="Email"
+					name="email"
+					value={profile.email}
+					onChange={handleChange}
+				/>
+			</div>
+
+			<div style={{ marginTop: 10 }}>
+				<TextInput
+					id="phone"
+					labelText="Phone"
+					name="phone"
+					value={profile.phone}
+					onChange={handleChange}
+				/>
+			</div>
+
+			<div style={{ marginTop: 10 }}>
+				<TextInput
+					id="location"
+					labelText="Location"
 					name="location"
 					value={profile.location}
 					onChange={handleChange}
 				/>
 			</div>
 
-			<div>
-				<p>About</p>
-				<TextInput name="about" value={profile.about} onChange={handleChange} />
+			<div style={{ marginTop: 10 }}>
+				<TextInput
+					id="about"
+					labelText="About"
+					name="about"
+					value={profile.about}
+					onChange={handleChange}
+				/>
 			</div>
 
-			<div>
-				<p>Years Of Experience</p>
+			<div style={{ marginTop: 10 }}>
 				<TextInput
+					id="experience"
+					labelText="Years of Experience"
 					name="experience"
 					value={profile.experience}
 					onChange={handleChange}
 				/>
 			</div>
 
-			<div>
+			<div style={{ marginTop: 10 }}>
 				<p>Skills</p>
 				<Checkbox
 					id="html"
@@ -168,7 +187,7 @@ const CreateProfile = () => {
 					id="javascript"
 					labelText="Javascript"
 					checked={profile.skills.includes("javascript")}
-					onChange={(e) => {
+					onChange={() => {
 						if (profile.skills.includes("javascript")) {
 							setProfile({
 								...profile,
@@ -188,7 +207,7 @@ const CreateProfile = () => {
 					id="supabase"
 					labelText="Supabase"
 					checked={profile.skills.includes("supabase")}
-					onChange={(e) => {
+					onChange={() => {
 						if (profile.skills.includes("supabase")) {
 							setProfile({
 								...profile,
@@ -206,7 +225,7 @@ const CreateProfile = () => {
 					id="sql"
 					labelText="SQL"
 					checked={profile.skills.includes("sql")}
-					onChange={(e) => {
+					onChange={() => {
 						if (profile.skills.includes("sql")) {
 							setProfile({
 								...profile,
@@ -224,7 +243,7 @@ const CreateProfile = () => {
 					id="css"
 					labelText="CSS"
 					checked={profile.skills.includes("css")}
-					onChange={(e) => {
+					onChange={() => {
 						if (profile.skills.includes("css")) {
 							setProfile({
 								...profile,
@@ -242,7 +261,7 @@ const CreateProfile = () => {
 					id="react"
 					labelText="React"
 					checked={profile.skills.includes("react")}
-					onChange={(e) => {
+					onChange={() => {
 						if (profile.skills.includes("react")) {
 							setProfile({
 								...profile,

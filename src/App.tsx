@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Tile } from "@carbon/react";
+import { Button } from "@carbon/react";
 import { Session, createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { ebraiSupabase } from "./config/supabase";
-import {
-	BrowserRouter,
-	Link,
-	Route,
-	Router,
-	Routes,
-	useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Roles from "./pages/Roles";
 import RolesDescription from "./pages/RoleDescription";
 import CreateProfile from "./pages/CreateProfile";
