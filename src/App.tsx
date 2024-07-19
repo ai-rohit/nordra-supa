@@ -65,10 +65,10 @@ function App() {
 			</div>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/roles" element={<Roles />} />
 					<Route path="/" element={<Roles />} />
-					<Route path="/roles/:id" element={<RolesDescription />} />
+					<Route path="/roles" element={<Roles />} />
 					<Route path="/create-profile" element={<CreateProfile />} />
+					<Route path="/roles/:id" element={<RolesDescription />} />
 				</Routes>
 			</BrowserRouter>
 		</>
